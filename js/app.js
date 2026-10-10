@@ -90,4 +90,22 @@ document.addEventListener("DOMContentLoaded", () => {
   i18nDetect();
   window.addEventListener("hashchange", routeChange);
   routeChange();
+
+  // Splash screen — let CSS animation play, then remove from DOM
+  const splash = document.getElementById("splash");
+  if (splash) {
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) {
+      splash.classList.add("done");
+      setTimeout(() => splash.remove(), 100);
+    } else {
+      splash.addEventListener("animationend", (e) => {
+        if (e.animationName === "splashOut") {
+          splash.remove();
+        }
+      });
+      // Safety fallback (in case animationend doesn't fire)
+      setTimeout(() => { if (splash.parentNode) splash.remove(); }, 4000);
+    }
+  }
 });

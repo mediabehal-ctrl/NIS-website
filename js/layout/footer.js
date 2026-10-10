@@ -50,7 +50,7 @@ export function renderFooter() {
           <li>Brampton · Toronto · ON</li>
           <li>Mon–Fri 9:00–6:00 · Sat 10:00–2:00</li>
           <li style="margin-top:.5rem;">
-            <a href="https://wa.me/14165550199" target="_blank" rel="noopener" style="color:#4ade80;font-weight:600;">WhatsApp us →</a>
+            <a href="https://wa.me/14165550199" target="_blank" rel="noopener" style="color:var(--c-gold,#E2A322);font-weight:600;">WhatsApp us →</a>
           </li>
         </ul>
       </div>

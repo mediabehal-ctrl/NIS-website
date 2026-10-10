@@ -24,8 +24,8 @@ export function home() {
           <div class="ring ring-2"></div>
           <div class="ring ring-3"></div>
           <svg class="path" viewBox="0 0 400 400" fill="none">
-            <path d="M80 320 C 180 340, 280 240, 200 120 C 160 60, 260 40, 320 80" stroke="#1F3A2D" stroke-width="1.5" stroke-dasharray="3 4" opacity=".35"/>
-            <path d="M60 240 C 140 220, 220 260, 340 200" stroke="#B04A32" stroke-width="1.5" stroke-dasharray="3 4" opacity=".45"/>
+            <path d="M80 320 C 180 340, 280 240, 200 120 C 160 60, 260 40, 320 80" stroke="#1a1a1a" stroke-width="1.5" stroke-dasharray="3 4" opacity=".35"/>
+            <path d="M60 240 C 140 220, 220 260, 340 200" stroke="#E2A322" stroke-width="1.5" stroke-dasharray="3 4" opacity=".45"/>
           </svg>
           <div class="dot" style="top:28%;left:22%;"></div>
           <div class="dot d2" style="top:58%;left:68%;"></div>

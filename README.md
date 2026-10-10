@@ -28,6 +28,6 @@ Publish directory: `out/`
 
 ## Color palette (preserved)
 
-- Cream: `#FAF6EE`
-- Deep green: `#1F3A2D`
-- Terracotta: `#B04A32`
+- Black: `#1a1a1a`
+- Gold: `#E2A322`
+- White: `#FFFFFF`
