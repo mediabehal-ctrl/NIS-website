@@ -6,7 +6,7 @@
   "description": "Nijjar Immigration Services — Canadian immigration practice website",
   "scripts": {
     "dev": "vite",
-    "build": "node node_modules/vite/bin/vite.js build",
+    "build": "node node_modules/vite/bin/vite.js build && cp -r dist out",
     "preview": "node node_modules/vite/bin/vite.js preview",
     "package": "node node_modules/vite/bin/vite.js build --base=./"
   },
