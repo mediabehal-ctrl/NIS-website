@@ -91,21 +91,45 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("hashchange", routeChange);
   routeChange();
 
-  // Splash screen — let CSS animation play, then remove from DOM
-  const splash = document.getElementById("splash");
-  if (splash) {
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReduced) {
-      splash.classList.add("done");
-      setTimeout(() => splash.remove(), 100);
+  // Intro logo sequence — once per browsing session, reduced-motion aware
+  const intro = document.getElementById("intro");
+  if (intro) {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const SEEN = "nijjar_intro_seen";
+    const alreadySeen = !reduced && sessionStorage.getItem(SEEN) === "1";
+
+    if (reduced || alreadySeen) {
+      // Skip intro entirely for reduced-motion or repeat visits
+      intro.classList.add("is-done");
+      setTimeout(() => { if (intro.parentNode) intro.remove(); }, 50);
     } else {
-      splash.addEventListener("animationend", (e) => {
-        if (e.animationName === "splashOut") {
-          splash.remove();
+      // Lock scroll while intro plays (no scrollbar from the enlarged logo)
+      const prevOverflow = document.documentElement.style.overflow;
+      document.documentElement.style.overflow = "hidden";
+      sessionStorage.setItem(SEEN, "1");
+      intro.classList.add("is-playing");
+
+      const finish = () => {
+        intro.classList.add("is-done");
+        document.documentElement.style.overflow = prevOverflow;
+        // Let the fade+de-blur transition run, then remove from the DOM
+        setTimeout(() => { if (intro.parentNode) intro.remove(); }, 700);
+      };
+
+      const logo = intro.querySelector(".intro-logo");
+      let done = false;
+      const onEnd = (e) => {
+        if (e.target !== logo) return;
+        // Fire on 'animationend' and 'animationcancel' for robustness
+        if (e.animationName === "introZoom") {
+          onEnd._done = true;
+          if (!done) { done = true; finish(); }
         }
-      });
-      // Safety fallback (in case animationend doesn't fire)
-      setTimeout(() => { if (splash.parentNode) splash.remove(); }, 4000);
+      };
+      logo.addEventListener("animationend", onEnd, { once: true });
+      logo.addEventListener("animationcancel", onEnd, { once: true });
+      // Safety net in case animationend doesn't fire or the tab is slow
+      setTimeout(() => { if (!done) { done = true; finish(); } }, 3400);
     }
   }
 });
