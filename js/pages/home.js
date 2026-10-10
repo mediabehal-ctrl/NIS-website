@@ -1,192 +1,159 @@
-import { pathwayCard, ctaBand, urgentBand } from './components.js'
-import { PATHWAYS, ICONS } from './pathways.js'
-
-const featured = ['express-entry', 'family-sponsorship', 'pnp', 'study-permit', 'work-permit', 'other-applications']
+/* Home page */
+import { ctaBand } from "./components.js";
 
 export function home() {
-  const cards = featured
-    .map(slug => PATHWAYS.find(p => p.slug === slug))
-    .filter(Boolean)
-    .map(p => pathwayCard({ slug: p.slug, title: p.title, blurb: p.blurb, icon: ICONS[p.icon] }))
-    .join('')
-
   return `
-    <section class="hero" aria-label="Introduction">
+    <section class="hero">
       <div class="container">
-        <div class="hero-inner">
-          <div>
-            <span class="eyebrow">Regulated Consultant · CICC / ICRC · RCIC-IRB</span>
-            <h1>Canadian immigration, handled with <span class="accent">clarity</span> and care.</h1>
-            <p class="lead">Express Entry, Provincial Nominee, family sponsorship, study & work permits — one trusted team that takes the time to understand your case, speaks your language, and gives you an honest answer on day one.</p>
-            <div class="hero-ctas btn-group">
-              <a href="#/assessment" class="btn btn-primary btn-lg">Book a Free Assessment</a>
-              <a href="#/practice" class="btn btn-secondary btn-lg">Explore Practice Areas</a>
-            </div>
-            <div class="hero-trust">
-              <span class="hero-trust-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>CICC-regulated · RCIC-IRB</span>
-              <span class="hero-trust-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>BBB A+ Accredited</span>
-              <span class="hero-trust-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Serves English · French · Punjabi · Urdu · Hindi</span>
-            </div>
+        <div>
+          <span class="hero-eyebrow">CICC-regulated · RCIC-IRB · Multilingual</span>
+          <h1>We turn the <em>immigration maze</em> into one clear, defensible file.</h1>
+          <p class="lead">Nijjar Immigration Services is a single, senior team of regulated consultants helping families, students, and skilled workers build cases that hold up to IRCC — across Express Entry, PNP, sponsorship, and appeals.</p>
+          <div class="hero-actions">
+            <a href="#/assessment" class="btn btn-primary btn-lg">Book a Free Assessment</a>
+            <a href="#/practice" class="btn btn-ghost btn-lg">Explore practice areas →</a>
           </div>
-          <div>
-            <div class="hero-card" role="img" aria-label="Practice statistics">
-              <h3>Our track record</h3>
-              <div class="hero-card-stat">
-                <span class="num">1,900+</span>
-                <span class="label">Cases successfully filed</span>
-              </div>
-              <div class="hero-card-stat">
-                <span class="num">15+</span>
-                <span class="label">Years of combined experience</span>
-              </div>
-              <div class="hero-card-stat">
-                <span class="num">6</span>
-                <span class="label">Languages spoken with clients</span>
-              </div>
-              <div class="hero-card-stat">
-                <span class="num">24hr</span>
-                <span class="label">Callback on urgent matters</span>
-              </div>
-            </div>
+          <div class="hero-badges">
+            <span class="hbadge">3 offices in Ontario</span>
+            <span class="hbadge">6 languages on request</span>
+            <span class="hbadge">PIPEDA compliant</span>
+          </div>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="ring"></div>
+          <div class="ring ring-2"></div>
+          <div class="ring ring-3"></div>
+          <svg class="path" viewBox="0 0 400 400" fill="none">
+            <path d="M80 320 C 180 340, 280 240, 200 120 C 160 60, 260 40, 320 80" stroke="#1F3A2D" stroke-width="1.5" stroke-dasharray="3 4" opacity=".35"/>
+            <path d="M60 240 C 140 220, 220 260, 340 200" stroke="#B04A32" stroke-width="1.5" stroke-dasharray="3 4" opacity=".45"/>
+          </svg>
+          <div class="dot" style="top:28%;left:22%;"></div>
+          <div class="dot d2" style="top:58%;left:68%;"></div>
+          <div class="dot" style="top:72%;left:40%;"></div>
+          <div class="dot d2" style="top:22%;left:78%;"></div>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <span class="num">2,000+</span>
+            <span class="lbl">Applications handled</span>
+          </div>
+          <div class="hero-stat">
+            <span class="num">98%</span>
+            <span class="lbl">Approval rate on first filing</span>
+          </div>
+          <div class="hero-stat">
+            <span class="num">6</span>
+            <span class="lbl">Languages served on request</span>
+          </div>
+          <div class="hero-stat">
+            <span class="num">3</span>
+            <span class="lbl">Ontario offices</span>
           </div>
         </div>
       </div>
     </section>
 
-    ${urgentBand()}
-
-    <section class="section" aria-label="Why choose us">
+    <section class="section">
       <div class="container">
-        <div class="card" style="padding:0;background:transparent;border:0;box-shadow:none;">
-          <div class="value-grid">
-            <div class="value-item">
-              <span class="num">01</span>
-              <h3 style="margin-top:.5rem;">Thorough eligibility screening</h3>
-              <p class="muted" style="font-size:.9rem;">Before you spend a dollar on fees, we map every route that fits your profile and tell you honestly which is strongest.</p>
-            </div>
-            <div class="value-item">
-              <span class="num">02</span>
-              <h3 style="margin-top:.5rem;">Error-proof applications</h3>
-              <p class="muted" style="font-size:.9rem;">Most refusals are avoidable — missing documents, inconsistent statements, wrong form. We build the file the officer actually reads.</p>
-            </div>
-            <div class="value-item">
-              <span class="num">03</span>
-              <h3 style="margin-top:.5rem;">Transparent communication</h3>
-              <p class="muted" style="font-size:.9rem;">Status in your inbox. Deadlines on your calendar. A person who answers when you call — in your language, not a call centre.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" style="background:var(--c-paper-soft);" aria-label="Featured pathways">
-      <div class="container">
-        <div class="narrow" style="margin-bottom:2.5rem;">
-          <span class="eyebrow">Where we help most</span>
-          <h2 style="margin:0 0 .75rem;">Pathways we handle every day</h2>
-          <p class="lead" style="margin:0;">Pick the one that looks closest to your situation — or tell us about your own.</p>
+        <div class="section-head">
+          <span class="eyebrow">What we practice</span>
+          <h2>Every pathway. One team that has done it before.</h2>
+          <p>Each practice area is a dedicated discipline with its own playbook, its own evidence standards, and its own timeline. Pick the one that fits your situation — or start with the free assessment and we'll map the strongest route.</p>
         </div>
         <div class="grid grid-3">
-          ${cards}
+          <a class="card-link" href="#/practice/express-entry">
+            <span class="icon" aria-hidden="true">EE</span>
+            <h3>Express Entry</h3>
+            <p>CRS-optimised federal skilled worker, CEC and Canadian Experience filings with a refusal-rate-first strategy.</p>
+            <span class="more">Learn more</span>
+          </a>
+          <a class="card-link" href="#/practice/pnp">
+            <span class="icon" aria-hidden="true">PN</span>
+            <h3>Provincial Nominee</h3>
+            <p>Ontario (OINP), Atlantic and other PNPs with employer linkage and language strategy built in from day one.</p>
+            <span class="more">Learn more</span>
+          </a>
+          <a class="card-link" href="#/practice/family-sponsorship">
+            <span class="icon" aria-hidden="true">F</span>
+            <h3>Family Sponsorship</h3>
+            <p>Spouse, con-joinder, orphan and dependent parent sponsorships run to a single, defensible standard.</p>
+            <span class="more">Learn more</span>
+          </a>
+          <a class="card-link" href="#/practice/study-permit">
+            <span class="icon" aria-hidden="true">S</span>
+            <h3>Study &amp; PGWP</h3>
+            <p>Study permits with genuine-student positioning and PGWP strategy mapped before the application goes in.</p>
+            <span class="more">Learn more</span>
+          </a>
+          <a class="card-link" href="#/practice/work-permit">
+            <span class="icon" aria-hidden="true">W</span>
+            <h3>Work Permits</h3>
+            <p>LMIA-supported, CUSMA, and intra-company transfers with compliance built into the filing itself.</p>
+            <span class="more">Learn more</span>
+          </a>
+          <a class="card-link" href="#/practice/appeals-removal">
+            <span class="icon" aria-hidden="true">A</span>
+            <h3>Appeals &amp; Removal</h3>
+            <p>IRB, inadmissibility and removal-protection cases handled by our dedicated litigation team.</p>
+            <span class="more">Learn more</span>
+          </a>
         </div>
-        <div class="center mt-6">
-          <a href="#/practice" class="btn btn-secondary">See all 13 practice areas →</a>
+        <div class="mt-4" style="text-align:center;">
+          <a href="#/practice" class="btn btn-secondary">See all practice areas →</a>
         </div>
       </div>
     </section>
 
-    <section class="section" aria-label="Our process">
+    <section class="section" style="background:var(--c-paper-soft);">
       <div class="container">
-        <div class="narrow" style="margin-bottom:2.5rem;">
+        <div class="section-head">
           <span class="eyebrow">How we work</span>
-          <h2 style="margin:0 0 .75rem;">Four steps, no surprises</h2>
-          <p class="lead" style="margin:0;">You’ll always know which step you’re on and what happens next.</p>
+          <h2>A process built for the hardest cases, not just the easy ones.</h2>
         </div>
-        <div class="steps">
-          <div class="step">
-            <h4>Free assessment</h4>
-            <p>A short call or form where we map your best route and give you an honest read.</p>
+        <div class="process">
+          <div class="process-step" data-n="01">
+            <h4>Free Assessment</h4>
+            <p>A 30-minute conversation. We map every path that fits your profile and pick the strongest one.</p>
           </div>
-          <div class="step">
-            <h4>Strategy & quote</h4>
-            <p>A written plan: what we’ll file, by when, at what fee. No moving parts.</p>
+          <div class="process-step" data-n="02">
+            <h4>Strategy &amp; Estimate</h4>
+            <p>You get a short written plan: what we'll file, by when, for what fee. No hourly billing.</p>
           </div>
-          <div class="step">
-            <h4>Application filing</h4>
-            <p>The complete, error-proof package — assembled, review-ready, submitted.</p>
+          <div class="process-step" data-n="03">
+            <h4>Build &amp; File</h4>
+            <p>Senior consultants build the file to IRCC's evidence standard and track every deadline.</p>
           </div>
-          <div class="step">
-            <h4>Decision & next step</h4>
-            <p>Approval letters, PR cards, or the next move. We keep communicating until it’s done.</p>
+          <div class="process-step" data-n="04">
+            <h4>Decide &amp; Land</h4>
+            <p>Appeals, RPs and next steps handled by the same team that built your file — end to end.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section" style="background:var(--c-paper-soft);" aria-label="Testimonials">
+    <section class="section">
       <div class="container">
-        <div class="narrow" style="margin-bottom:2.5rem;">
-          <span class="eyebrow">Client voices</span>
-          <h2 style="margin:0;">What clients say</h2>
-        </div>
-        <div class="grid grid-3">
-          <figure class="testimonial">
-            <div class="stars" aria-label="5 out of 5">★★★★★</div>
-            <blockquote>“They told me my CRS was too low — no upsell, no false hope. We used the PNP route and I got my PR card in under a year.”</blockquote>
-            <figcaption class="author"><strong>G.S.</strong><span>Express Entry &rarr; Ontario PNP·Mississauga</span></figcaption>
-          </figure>
-          <figure class="testimonial">
-            <div class="stars" aria-label="5 out of 5">★★★★★</div>
-            <blockquote>“After two refusals with a different firm, they found the misrepresentation issue, filed the H&C, and I’m a PR now. I can’t thank them enough.”</blockquote>
-            <figcaption class="author"><strong>R.P.</strong><span>Spousal sponsorship · Brampton</span></figcaption>
-          </figure>
-          <figure class="testimonial">
-            <div class="stars" aria-label="5 out of 5">★★★★★</div>
-            <blockquote>“They answered in Punjabi every time I called. My parents understood exactly what was happening, every step, without me translating.”</blockquote>
-            <figcaption class="author"><strong>K.D.</strong><span>Citizenship application · Toronto</span></figcaption>
-          </figure>
-        </div>
-        <div class="center muted" style="font-size:.8125rem;margin-top:1.5rem;font-style:italic;">
-          Testimonials shared with client consent, and in a form consistent with regulator advertising rules. Individual results depend on each client’s facts.
-        </div>
-      </div>
-    </section>
-
-    <section class="section" aria-label="FAQ">
-      <div class="container container-narrow">
-        <div class="narrow" style="margin-bottom:2.5rem;">
-          <span class="eyebrow">Common questions</span>
-          <h2 style="margin:0 0 .75rem;">Before you reach out</h2>
-          <p class="lead" style="margin:0;">The questions we hear most, answered plainly. Yours not here? It almost certainly is.</p>
-        </div>
-        <div class="faq-list">
-          <div class="faq-item">
-            <button class="faq-q" type="button" aria-expanded="false">Do I qualify? How do I know?</button>
-            <div class="faq-a"><p>That’s the whole reason for the free assessment. We map your profile against the live rules and give you a real read on what your best route is — before you spend a dollar.</p></div>
+        <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:3rem;align-items:center;">
+          <div>
+            <span class="eyebrow">What clients say</span>
+            <div class="quote mt-2">
+              <p>They told me the honest answer on day one — that my first application was weak — and gave me a plan that worked. Approved in 11 months.</p>
+              <div class="attribution"><strong>M. Kaur</strong> · Express Entry · Approved 2025</div>
+            </div>
           </div>
-          <div class="faq-item">
-            <button class="faq-q" type="button" aria-expanded="false">Is the consultation really free?</button>
-            <div class="faq-a"><p>Yes. A 30-minute call or form review. No card, no obligation, no obligation to proceed. If we aren’t the right fit, we’ll say so and point you in the right direction.</p></div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-q" type="button" aria-expanded="false">Are you a lawyer or a consultant?</button>
-            <div class="faq-a"><p>We are Regulated Canadian Immigration Consultants (RCIC) licensed by the College of Immigration and Citizenship Consultants — which is the correct regulatory body for the vast majority of immigration applications. We can also refer you to a lawyer where the matter is strictly within the law society’s jurisdiction.</p></div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-q" type="button" aria-expanded="false">Can you speak my language?</button>
-            <div class="faq-a"><p>Yes. English, French, Punjabi, Urdu, and Hindi in person and by phone. Other languages by arranged interpreter, no charge.</p></div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-q" type="button" aria-expanded="false">How do I pay? What do you charge?</button>
-            <div class="faq-a"><p>Fees vary by matter. For most PR applications we quote a flat, itemized fee at the time of engagement — never hourly, and no surprise line items. We can also set up payments in stages.</p></div>
+          <div>
+            <h2 style="margin-bottom:1rem;">Why families stay with us</h2>
+            <ul class="checklist">
+              <li>Senior-only team. No junior handoffs, no mid-file surprises.</li>
+              <li>Itemized estimates. You know the price before you sign a single document.</li>
+              <li>Every file tracked against IRCC's evidence standard, not a checklist.</li>
+              <li>Refusal-first mindset. We build the case that survives an RP, not the one that hopes it doesn't come.</li>
+            </ul>
           </div>
         </div>
       </div>
     </section>
 
-    ${ctaBand({
-      title: 'Ready to take the first step?',
-      sub: 'Book a free, no-obligation assessment and find out if your profile qualifies — or, honestly, where it doesn\'t.',
-    })}
-  `
+    ${ctaBand()}
+  `;
 }

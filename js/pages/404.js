@@ -1,15 +1,16 @@
+/* 404 */
 export function notFound() {
   return `
-    <section class="section" style="text-align:center;padding:5rem 1.5rem;">
-      <div class="container container-narrow">
-        <span class="eyebrow">404</span>
-        <h1 style="margin:.75rem 0;">That page doesn't exist.</h1>
-        <p class="lead" style="margin:0 auto 2rem;">Either the link is old, or the address is a little off. Let's get you back on the path that does work.</p>
-        <div class="btn-group" style="justify-content:center;">
-          <a href="#/" class="btn btn-primary btn-lg">Back home</a>
-          <a href="#/practice" class="btn btn-secondary btn-lg">Browse practice areas</a>
+    <section class="section notfound">
+      <div class="container container-narrow" style="text-align:center;">
+        <div class="nf-code" aria-hidden="true">404</div>
+        <h1>Page not found</h1>
+        <p class="muted">The page you're looking for may have moved, or was removed.</p>
+        <div class="btn-group mt-4" style="justify-content:center;">
+          <a href="#/" class="btn btn-primary">Back to home</a>
+          <a href="#/practice" class="btn btn-secondary">Practice areas</a>
         </div>
       </div>
     </section>
-  `
+  `;
 }

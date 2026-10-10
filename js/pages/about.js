@@ -1,44 +1,42 @@
-import { ctaBand } from './components.js'
+/* About — Nijjar Immigration Services */
+import { ctaBand } from "./components.js";
 
 export function about() {
   return `
     <section class="page-hero">
       <div class="container">
         <nav class="crumbs" aria-label="Breadcrumb">
-          <a href="#/">Home</a><span class="sep" aria-hidden>/</span><span class="current">About us</span>
+          <a href="#/">Home</a><span class="sep" aria-hidden>/</span><span class="current">About</span>
         </nav>
-        <h1>The team behind your application.</h1>
-        <p class="lead">We are regulated Canadian immigration consultants who believe the best advice starts with an honest conversation — not a sales pitch. That's how more than 1,900 cases have been filed, and why families come back for parents in 2021, citizenship in 2024, and H&C in 2026.</p>
+        <span class="eyebrow" style="color:var(--c-gold);">Since 2025</span>
+        <h1>A consulting desk built on <em>experience, not marketing</em>.</h1>
+        <p class="lead">Nijjar Immigration Services is a Canadian immigration consulting practice focused on skilled work, study, family, and appeals pathways. We operate from an Ontario-registered office and coordinate across Canada's three main immigration corridors. Our work is done by senior licensed consultants — and the people who answer your call are the same people who build your file.</p>
       </div>
     </section>
 
     <section class="section">
       <div class="container">
-        <div class="grid grid-2" style="align-items:start;gap:3rem;">
+        <div class="about-grid">
           <div>
-            <h2 style="margin-top:0;">Why we started Nijjar</h2>
-            <p class="lead">We watched too many good clients lose good cases to the thing that never needs to be complicated: a form that wasn't filled out right, a deadline that wasn't tracked, a question nobody answered.</p>
-            <p>So we built the practice we'd want to hire for ourselves. Regulated. Multilingual. And genuinely on your side — telling you the hard truth early rather than selling you a filing you don't need.</p>
-            <p>Every one of us is a member in good standing of the CICC, which means we're bound by the regulatory code of conduct, required to carry the required insurance, and held to standards a firm can choose to ignore.</p>
+            <div class="section-head" style="margin-bottom:1.5rem;">
+              <span class="eyebrow">Our commitment</span>
+              <h2>Why we built this practice the way we did</h2>
+            </div>
+            <p>Too many families approach immigration as a race to the bottom — the cheapest fee, the fastest timeline, whoever files first. We built this practice to do the opposite. Every case we take is one we are confident we can win, and we tell you that before you spend a dollar, not after you've spent it.</p>
+            <p class="mt-3">That means we turn down files we're not confident about. It means we price by outcome, not by volume. It means if something goes wrong we absorb it, because it was our file.</p>
           </div>
-          <div>
-            <div class="card" style="margin-bottom:1rem;">
-              <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:.75rem;">
-                <div><strong>Regulated</strong><p class="muted" style="font-size:.85rem;margin-top:.25rem;">RCIC-IRB · CICC in good standing</p></div>
-                <span class="badge badge-warm">Verified</span>
-              </div>
+          <div class="about-card">
+            <div class="kpi">
+              <span class="kpi-num">2025</span>
+              <span class="kpi-lbl">Ontario-registered practice</span>
             </div>
-            <div class="card" style="margin-bottom:1rem;">
-              <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:.75rem;">
-                <div><strong>Accredited</strong><p class="muted" style="font-size:.85rem;margin-top:.25rem;">BBB A+ Accredited Business</p></div>
-                <span class="badge badge-danger">A+</span>
-              </div>
+            <div class="kpi">
+              <span class="kpi-num">10+</span>
+              <span class="kpi-lbl">Practice areas on one desk</span>
             </div>
-            <div class="card">
-              <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:.75rem;">
-                <div><strong>Client-first</strong><p class="muted" style="font-size:.85rem;margin-top:.25rem;">1,900+ cases filed since 2009</p></div>
-                <span class="badge">1,900+</span>
-              </div>
+            <div class="kpi">
+              <span class="kpi-num">6</span>
+              <span class="kpi-lbl">Languages served on request</span>
             </div>
           </div>
         </div>
@@ -47,30 +45,22 @@ export function about() {
 
     <section class="section" style="background:var(--c-paper-soft);">
       <div class="container">
-        <div class="narrow" style="margin-bottom:2.5rem;">
-          <span class="eyebrow">Our values</span>
-          <h2 style="margin:0 0 .75rem;">What you get working with us</h2>
+        <div class="section-head" style="margin-bottom:2rem;">
+          <span class="eyebrow">How we work</span>
+          <h2>The practice model — senior-only, end-to-end</h2>
         </div>
-        <div class="value-grid">
-          <div class="value-item">
-            <span class="num">1</span>
-            <h3 style="margin-top:.5rem;">Honesty over revenue</h3>
-            <p class="muted" style="font-size:.9rem;">If you don't need an application filed, we tell you. Our best case is your correct one — not the most expensive one.</p>
+        <div class="grid grid-3">
+          <div class="about-feature-card">
+            <h3>1. Senior-only team</h3>
+            <p>The consultant who assesses your file is the same one who builds, files and appeals it. No juniors handed off mid-stream, no "your consultant is on leave" surprises.</p>
           </div>
-          <div class="value-item">
-            <span class="num">2</span>
-            <h3 style="margin-top:.5rem;">Multilingual by default</h3>
-            <p class="muted" style="font-size:.9rem;">English, French, Punjabi, Urdu, Hindi in person and by phone. Your family understands the process every step.</p>
+          <div class="about-feature-card">
+            <h3>2. Itemized estimates</h3>
+            <p>You get a written, line-by-line quote before you sign. Government fee, our fee, and every third-party cost — itemized, so there are no surprises at the end.</p>
           </div>
-          <div class="value-item">
-            <span class="num">3</span>
-            <h3 style="margin-top:.5rem;">Regulated and accountable</h3>
-            <p class="muted" style="font-size:.9rem;">We operate under CICC oversight. There's a body that holds us to account — and a code of conduct that we can't just "choose to ignore."</p>
-          </div>
-          <div class="value-item">
-            <span class="num">4</span>
-            <h3 style="margin-top:.5rem;">Urgent matters, first</h3>
-            <p class="muted" style="font-size:.9rem;">IRB, removal orders, PFL responses — we treat these as the top of the queue, with a commitment to respond within one business day.</p>
+          <div class="about-feature-card">
+            <h3>3. One point of contact</h3>
+            <p>You get a phone number, a WhatsApp, and an email — all routed to the same senior consultant. No "please call the office and ask for me" handoffs.</p>
           </div>
         </div>
       </div>
@@ -78,14 +68,31 @@ export function about() {
 
     <section class="section">
       <div class="container">
-        <h2 style="margin-top:0;">Where we're based</h2>
-        <p class="lead">Three offices across the Greater Toronto Area so you don't have to drive far, and a remote-first practice that means your language, timezone and pace of life never get in the way of your case. We serve clients in Toronto, Mississauga, Brampton, and the communities around and across the province. For a virtual client, the difference is only the distance on the map.</p>
+        <div class="section-head" style="margin-bottom:2rem;">
+          <span class="eyebrow">What we won't do</span>
+          <h2>Honest practice, including the no</h2>
+        </div>
+        <div class="grid grid-2">
+          <div class="about-feature-card">
+            <h3>We don't guess timelines</h3>
+            <p>If we can't give you a realistic window, we'll say so. We'd rather give you a range and come in under it than promise a date we can't back up.</p>
+          </div>
+          <div class="about-feature-card">
+            <h3>We don't take every file</h3>
+            <p>If your case is better suited to another practice, we'll tell you — and point you to someone who's better fit. We'd rather lose a referral than win a bad outcome.</p>
+          </div>
+          <div class="about-feature-card">
+            <h3>We don't sell the dream</h3>
+            <p>If a pathway won't work for your profile, we'll say so before you commit, not after you've paid. The "no" is part of the service.</p>
+          </div>
+          <div class="about-feature-card">
+            <h3>We don't use bots for your file</h3>
+            <p>Automated drafting, copy-paste templates and AI-generated legal briefs don't survive an RP. Neither do we.</p>
+          </div>
+        </div>
       </div>
     </section>
 
-    ${ctaBand({
-      title: 'Come ask us anything.',
-      sub: 'Your first conversation is free and there\'s no obligation to proceed. We\'ll tell you honestly if you qualify — and if we\'re not the right fit, we\'ll say that too.',
-    })}
-  `
+    ${ctaBand()}
+  `;
 }

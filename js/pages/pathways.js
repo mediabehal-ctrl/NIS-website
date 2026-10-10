@@ -1,256 +1,244 @@
-/* Practice-areas data — 13 pathways from the brief.
-   Each entry drives a detail page at /practice/<slug>. */
+/* Practice area detail pages */
+import { ctaBand, faqList } from "./components.js";
+import { bindFaq } from "./components.js";
 
-const ICONS = {
-  express: '<path d="M2 12h20M12 2c5 4 5 16 0 20M12 2c-5 4-5 16 0 20M2 12c3-2 17-2 20 0M2 12c3 2 17 2 20 0"/>',
-  pnp: '<path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>',
-  family: '<circle cx="9" cy="7" r="4"/><path d="M2 21v-2a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M22 21v-2a4 4 0 0 0-3-3.85"/>',
-  study: '<path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1 2 3 6 3s6-2 6-3v-5"/>',
-  work: '<rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>',
-  citizen: '<path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/>',
-  caregiver: '<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7z"/>',
-  lmia: '<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect width="8" height="4" x="8" y="2"/><path d="M9 12h6M9 16h6"/>',
-  refuge: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
-  hc: '<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>',
-  appeals: '<path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/><path d="M5 3 2 6l3 3"/>',
-  notary: '<path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/>',
-  other: '<circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>',
+const DATA = {
+  "express-entry": {
+    title: "Express Entry",
+    kicker: "Federal skilled work",
+    hero: `<em>CRS-optimised</em> Express Entry filings that hold up to an RP — not just to a first read. We file for refusal-rate, not for the lowest bar.`,
+    lead: `Federal Skilled Worker, Canadian Experience Class and other Express Entry streams, with a strategy built around your realistic CRS range and the next few draws — not the last one.`,
+    steps: [
+      { phase: "Week 1", title: "CRS review & draw modelling", text: "We read your CRS honestly, model the next 6–12 months of draws, and tell you which streams actually fit your profile.", meta: "30-min call" },
+      { phase: "Weeks 2–4", title: "Profile optimisation", text: "Language retest strategy, ECA upgrades, and work-history alignment to every point you're eligible for.", meta: "Written report" },
+      { phase: "Month 2", title: "Profile submission", text: "We build the federal profile to IRCC's evidence standard and submit with a refusal-first risk memo attached.", meta: "Filed" },
+      { phase: "Draws → ITA", title: "Draw monitoring & ITA prep", text: "If you score, we move to ITA inside the 60-day window with your full filing kit ready to go.", meta: "Tracked weekly" },
+      { phase: "After ITA", title: "Filing & medicals", text: "Federal application, medicals, police checks, and the final biometric step — managed end-to-end.", meta: "Avg 4–8 wks" },
+    ],
+    faq: [
+      { q: "Do I need to 'game' my CRS to score?", a: "No. We model the draws, position your profile for the realistic range, and tell you honestly if the stream isn't the right route — and what is." },
+      { q: "What happens if I don't get an ITA?", a: "We keep monitoring, re-test language if it helps, and re-strategise for the next draw. The strategy memo you get is yours to keep." },
+    ],
+  },
+  "pnp": {
+    title: "Provincial Nominee (PNP)",
+    kicker: "Ontario & Atlantic",
+    in: `<em>PNP</em> pathways with employer linkage, language strategy and timing — not a generic "apply now" pitch.`,
+    lead: `Provincial Nominee streams across Ontario (OINP), Atlantic and other provinces, with the employer, timing and language pieces built in from day one.`,
+    steps: [
+      { phase: "Week 1", title: "Province & stream fit", text: "We map which provinces' streams match your job, language and education profile — including those you haven't heard of." },
+      { phase: "Weeks 2–4", title: "Employer & documentation", text: "Job offer alignment (where required), ECA, language retesting and the documentation stack, in parallel." },
+      { phase: "Month 2–3", title: "Provincial filing", text: "We file to the province's evidence standard and track the timeline against the next intake window." },
+      { phase: "Provincial approval", title: "Federal handoff", text: "Once the province approves, we roll into the federal stage so the two filings don't lose momentum." },
+      { phase: "Final", title: "PR decision", text: "Biometrics, medicals and the final decision step, with the same consultant who built your file." },
+    ],
+    faq: [
+      { q: "Do I need an employer?", a: "Some streams do, most don't. We'll tell you which of your profile can go in without one, and which ones can't, before you commit." },
+      { q: "How long does a PNP take?", a: "Provincial timelines vary by province and stream — typically a few months, then the federal stage. We give you realistic timelines for the exact stream we recommend." },
+    ],
+  },
+  "family-sponsorship": {
+    title: "Family Sponsorship",
+    kicker: "Spouse · parents · children",
+    in: `Family sponsorship, run to a <em>single defensible standard</em> — not to the lowest bar that gets a filing accepted.`,
+    lead: `Spouse, con-joinder, orphan and dependent parent sponsorships. The same careful standard across every family category, because IRCC's family-class evidence expectations are the highest in the program.`,
+    steps: [
+      { phase: "Week 1", title: "Category & evidence map", text: "We confirm the exact category (spouse, partner, con-joinder, dependent parent) and build your evidence map around it." },
+      { phase: "Weeks 2–4", title: "Relationship & financials", text: "Relationship evidence, financial support documents, and the sponsorship undertaking, all coordinated." },
+      { phase: "Filing", title: "Federal submission", text: "We file to IRCC's family-class evidence standard and track the processing window for your category." },
+      { phase: "Processing", title: "RCMP & medicals", text: "Police certificates and medicals for the sponsored person, in the right order, in the right window." },
+      { phase: "Approved", title: "Landing & citizenship", text: "Post-PR next steps, including the citizenship pathway if it fits the family's timeline." },
+    ],
+    faq: [
+      { q: "Do we have to be cohabiting for a spousal sponsorship?", a: "Not always. We assess the category and the best-supported evidence for your specific situation before filing." },
+      { q: "How long does spousal sponsorship take?", a: "It varies by category and stream. We give you a processing window based on IRCC's current published timeframes for your exact category." },
+    ],
+  },
+  "study-permit": {
+    title: "Study & PGWP",
+    kicker: "Genuine-student positioning",
+    in: `Study permits with <em>genuine-student positioning</em> and a PGWP strategy mapped before the application goes in — not after.`,
+    lead: `Study permit applications that hold up to IRCC's post-ACEST genuine-student scrutiny, with Post-Graduation Work Permit eligibility confirmed before we file, so the whole journey is designed as one continuous plan.`,
+    steps: [
+      { phase: "Week 1", title: "Program fit & GSWA", text: "We assess the program, institution and your profile for genuine-student positioning, and confirm PGWP eligibility before you commit." },
+      { phase: "Weeks 2–3", title: "Documentation", text: "Financials, English (if required), program justification and the supporting stack, coordinated in one package." },
+      { phase: "Filing", title: "Study permit submission", text: "We file to IRCC's evidence standard and track the processing window for your program type." },
+      { phase: "Decision", title: "Approval conditions", text: "If approved, we read the conditions carefully and make sure you know exactly what they require." },
+      { phase: "After study", title: "PGWP transition", text: "We file the PGWP inside the eligibility window so the study-to-work transition is seamless." },
+    ],
+    faq: [
+      { q: "Do I need a strong profile for a study permit?", a: "You need a coherent story: why this program, why this institution, and why you'll return. We build that story into the filing from the start." },
+      { q: "Can I get a PGWP after my program?", a: "Most programs qualify — we confirm eligibility before you commit to the program, so you're not finding out after you've finished." },
+    ],
+  },
+  "work-permit": {
+    title: "Work Permits",
+    kicker: "LMIA · CUSMA · ICT",
+    in: `Work permits with <em>compliance built in</em> — not just a filing accepted, but one that holds up to an employer audit.`,
+    lead: `LMIA-supported work permits, CUSMA professional mobility, and intra-company transfers. Each stream has different employer obligations, and we build the filing to the standard IRCC enforces for that specific stream.`,
+    steps: [
+      { phase: "Week 1", title: "Stream assessment", text: "We confirm which work-permit stream fits your employer, role and your own profile — and what the employer needs to do." },
+      { phase: "Weeks 2–6", title: "Employer side", text: "LMIA job offer, wage assessment, or CUSMA compliance stack — handled in parallel with your personal documentation." },
+      { phase: "Filing", title: "Work permit submission", text: "We file to the stream's evidence standard and track the processing window." },
+      { phase: "Decision", title: "Approval & conditions", text: "We review the approval conditions and make sure the employer understands their ongoing obligations." },
+      { phase: "After approval", title: "Renewals & extensions", text: "Before the permit expires, we start the renewal conversation so there's no gap in status." },
+    ],
+    faq: [
+      { q: "Does my employer need an LMIA?", a: "Not always — CUSMA and some other streams are LMIA-exempt. We confirm the right stream before your employer commits to any cost." },
+      { q: "How long does a work permit take?", a: "It varies by stream and visa office. We give you a processing window based on the exact stream we recommend." },
+    ],
+  },
+  "citizenship": {
+    title: "Citizenship",
+    kicker: "Adults · couples · families",
+    in: `Citizenship applications with the <em>residency and intent evidence</em> assembled before filing — not discovered in a refusal letter.`,
+    lead: `Canadian citizenship for adults, spouses, and families. The residency calculation, intent documentation and oath-preparation, all done with the same care we give a first-time application.`,
+    steps: [
+      { phase: "Week 1", title: "Residency calculation", text: "We calculate your qualifying physical presence day by day, including the tax filing rules that catch people out." },
+      { phase: "Week 2", title: "Evidence assembly", text: "Travel history, tax returns, intent documentation and the supporting stack, all in one package." },
+      { phase: "Filing", title: "Citizenship application", text: "We file to IRCC's evidence standard and track the processing window." },
+      { phase: "Oath", title: "CERB & oath", text: "We track the citizenship record, oath invitation and the final ceremony scheduling." },
+      { phase: "After oath", title: "Passport & next steps", text: "We help with the Canadian passport application and the next steps once you're a citizen." },
+    ],
+    faq: [
+      { q: "Do I need to have filed Canadian taxes?", a: "Yes — for the three of your last five years. We check this before we file, so it's not a surprise in a refusal." },
+      { q: "How long does citizenship take?", a: "Current IRCC processing timeframes are typically 12 months or more for most applications — we give you a realistic window at the start." },
+    ],
+  },
+  "refugee-asylum": {
+    title: "Refugee / Asylum (IRB)",
+    kicker: "IRB litigation",
+    in: `Asylum and refugee claims handled by a <em>dedicated IRB litigation team</em> — not by a generalist filing a form.`,
+    lead: `In-Canada and offshore protection claims. This is the area where a generalist filing a form is not just risky — it's disqualifying. We use a litigation team that has appeared before the IRB.`,
+    steps: [
+      { phase: "Week 1", title: "Claim assessment", text: "We assess your claim for credibility, consistency and the risk of a negative RSD first-instance decision." },
+      { phase: "Weeks 2–4", title: "Claim drafting", text: "The claim, the supporting documentation and the legal authority — drafted for the hearing, not for the file." },
+      { phase: "Hearing", title: "RSD appearance", text: "A member of the IRB team appears on your behalf. We prepare you for the credibility questions you'll be asked." },
+      { phase: "Decision", title: "Post-decision", text: "If you're approved, we help with the follow-through. If you're refused, we assess the appeal options before the deadline." },
+    ],
+    faq: [
+      { q: "Is this different from a regular immigration case?", a: "Yes. The evidence standard, the hearing structure and the decision-makers are all different. We use a team that works in the IRB space specifically." },
+      { q: "Can I claim while I'm in Canada?", a: "Yes, in most cases. We assess the specific facts before committing you to any filing." },
+    ],
+  },
+  "caregivers": {
+    title: "Caregivers",
+    kicker: "Home child care · home support",
+    in: `Caregiver streams with <em>employer compliance</em> and language pathways mapped before you commit.`,
+    lead: `The Home Child Care and Home Support streams, with the employer obligations and language requirements built into the plan — so you're not surprised at the filing stage.`,
+    steps: [
+      { phase: "Week 1", title: "Stream eligibility", text: "We confirm which caregiver stream fits your role, experience and language profile." },
+      { phase: "Weeks 2–6", title: "Employer & LMIA", text: "The job offer, LMIA support and the compliance documentation, coordinated in parallel." },
+      { phase: "Filing", title: "Application submission", text: "We file to the stream's evidence standard and track the processing window." },
+      { phase: "Approval", title: "Conditions & PR pathway", text: "We review the work-permit conditions and confirm the PR pathway is available under the current rules." },
+    ],
+    faq: [
+      { q: "Do I need Canadian experience?", a: "The streams have different requirements — we confirm the right stream for your specific profile before you commit." },
+      { q: "Can I get PR after this?", a: "Under the current rules, yes — but the requirements change. We map the PR pathway before you start, not after." },
+    ],
+  },
+  "appeals-removal": {
+    title: "Inadmissibility & Appeals",
+    kicker: "IRB · RPs · removal",
+    in: `The <em>hard file</em> — refusals, removal orders, RPs and inadmissibility — handled end-to-end by the team that builds them.`,
+    lead: `This is the part of immigration law where a generic filing is not a strategy — it's a risk. We handle the appeals, removal-protection and inadmissibility cases with the same care we give a first application.`,
+    steps: [
+      { phase: "Week 1", title: "Case assessment", text: "We read the refusal letter, the RP questions, or the removal order and tell you honestly what the options are." },
+      { phase: "Weeks 2–4", title: "Appeal drafting", text: "The legal brief, the supporting documentation and the evidence standard, all assembled in one package." },
+      { phase: "Filing", title: "Appeal or review", text: "We file within the deadline and track the decision window." },
+      { phase: "Decision", title: "Post-decision", text: "If successful, we help with the follow-through. If not, we assess the next layer of the process." },
+    ],
+    faq: [
+      { q: "Is there a deadline to appeal?", a: "Almost always — and it's short. Contact us as soon as you have the decision in hand." },
+      { q: "Can I appeal a removal order?", a: "Yes, in most cases. The process is different from a regular immigration appeal — we handle it specifically." },
+    ],
+  },
+  "notary-services": {
+    title: "Notary & Certified Copy",
+    kicker: "Document support",
+    in: `Certified copies, apostille and notarial work for the <em>documents IRCC will ask for next</em>.`,
+    lead: `When IRCC asks for certified copies, apostilled documents or notarial work, we handle it — so it's not a delay you have to manage yourself.`,
+    steps: [
+      { phase: "When needed", title: "Document list", text: "We give you the exact list of documents IRCC will likely request, so you're not chasing them one by one." },
+      { phase: "Certified copies", title: "Certified copies", text: "We provide certified copies from our office, with the correct formatting and certification." },
+      { phase: "Apostille", title: "Apostille & notarial", text: "For foreign-issued documents, we manage the apostille process and any notarial requirements." },
+    ],
+    faq: [
+      { q: "Do I need certified copies for every document?", a: "No — but we'll tell you exactly which ones IRCC will ask for, so you don't send extras and you don't miss the ones that matter." },
+    ],
+  },
 };
 
-export const PATHWAYS = [
-  {
-    slug: 'express-entry',
-    title: 'Express Entry',
-    tagline: 'Skilled worker, Canadian Experience & French-first streams',
-    icon: 'express',
-    blurb: 'The fast-track for skilled workers. We score your CRS, identify the right stream (FSWP, CEC, FSTP), and get you an Invitation to Apply.',
-    who: ['Skilled workers outside Canada', 'Workers already in Canada (CEC)', 'Bilingual candidates (French-speaking)', 'Provincially-nominated Express Entry candidates'],
-    steps: [
-      'Eligibility & CRS scoring — we verify points against current draw cut-offs and pick the strongest stream.',
-      'Profile optimization — experience, language, education, and occupation strategy to lift your score.',
-      'Profile submission — EOI profile into the pool, monitored through every draw.',
-      'ITA & application — complete, error-free submission with the full documentary package.',
-    ],
-    faqs: [
-      { q: 'What score do I need for an Invitation to Apply?', a: 'Scores vary by stream and draw. General Canadian draws currently sit in the ~500s; French-First and skilled-trade draws can be meaningfully lower. We check your exact range against the latest draws before we start.' },
-      { q: 'How long does Express Entry take?', a: 'From ITA to a decision, most first-time applicants are processed in about 6 months. Time in the pool before an ITA depends on your CRS and draw activity — many candidates are within 12–24 months.' },
-      { q: 'My CRS score is below the current cut-off. Can I still get through?', a: 'Often, yes. We look at stream fit, French-first eligibility, category-based draws, and PNP routes that can bypass the pooled cut-off entirely.' },
-      { q: 'What documents do I need first?', a: 'Valid passport, language test results (IELTS/CELPIP or TEF/TCF), educational credential assessment (ECA), and employment letters. We give you a tailored checklist once your eligibility is confirmed.' },
-    ],
-  },
-  {
-    slug: 'pnp',
-    title: 'Provincial Nominee Programs (PNP)',
-    tagline: 'Provincial pathways tailored to your skills and location',
-    icon: 'pnp',
-    blurb: 'Each province nominates candidates that fit its labour market. We match you to the right stream in the right province — many have lower cut-offs than federal Express Entry.',
-    who: ['Skilled workers without a high CRS', 'Students graduating in that province', 'In-demand occupation profiles', 'Spouses of in-province workers'],
-    steps: [
-      'Province & stream selection — Ontario, Manitoba, Saskatchewan, BC, Atlantic and others.',
-      'Nomination file — tailored to the province’s labour-market priorities.',
-      'PR application — we prepare the federal PR file after nomination is granted.',
-    ],
-    faqs: [
-      { q: 'Which province should I apply through?', a: 'It depends on your occupation, experience, language, and any provincial connections (study, work, family). We run a province-compatibility matrix rather than a one-size-fits-all answer.' },
-      { q: 'Do I need a job offer for PNP?', a: 'Not always. Many streams (international graduate, in-demand skills, regional initiatives) do not require a live job offer. We identify offer-free options in your situation.' },
-      { q: 'How is PNP different from Express Entry?', a: 'PNP is province-run. Some PNP streams feed into Express Entry for a 600-point boost; others are standalone applications. We tell you which route fits your profile.' },
-    ],
-  },
-  {
-    slug: 'family-sponsorship',
-    title: 'Family Sponsorship',
-    tagline: 'Spousal, parents/grandparents, and dependent children',
-    icon: 'family',
-    blurb: 'Bring the people you love to Canada. Spousal, conjugal, and parent/grandparent sponsorship handled with the care these cases deserve.',
-    who: ['Canadian citizens & PRs sponsoring a spouse or common-law partner', 'Sponsoring parents or grandparents', 'Sponsoring dependent children', 'Conjugal partners living abroad in a genuine relationship'],
-    steps: [
-      'Relationship & eligibility review — we establish what the IRCC needs to see.',
-      'Sponsorship package — your household, tax, and relationship evidence, organized.',
-      'Open/Closed strategy — where an open work/study permit makes sense early.',
-    ],
-    faqs: [
-      { q: 'How long does spousal sponsorship take?', a: 'Processing times vary; inland spousal sponsorship is currently in the several-months range. We give you a current-time estimate and flag where open-permit strategy can shorten waiting time.' },
-      { q: 'Can I sponsor my long-distance partner?', a: 'If you live together less than half the time, live outside Canada, and could not reasonably live together, conjugal sponsorship may apply. This is one of the trickiest categories — professional handling matters.' },
-      { q: 'Do my sponsor’s assets or income affect approval?', a: 'Yes. Sponsorship requires meeting minimum low-income cut-offs and no social-assistance reliance (unless waived). We verify your sponsor eligibility before you commit.' },
-    ],
-  },
-  {
-    slug: 'study-permit',
-    title: 'Study Permits & PGWP',
-    tagline: 'International students & post-graduation work permits',
-    icon: 'study',
-    blurb: 'From admission to study permit to the PGWP that can become a PR route. We get the full student pathway right.',
-    who: ['International students applying to Canadian DLI', 'Parents of student children', 'Students planning the PGWP → PR route', 'Students switching to work study streams'],
-    steps: [
-      'Admission & DLI check — confirm the school and program qualify.',
-      'Study permit file — financial, biographic and intent evidence.',
-      'PGWP strategy — line up the post-graduation permit for a clean PR runway.',
-    ],
-    faqs: [
-      { q: 'What is a PGWP?', a: 'The Post-Graduation Work Permit lets you work in Canada after graduating from an eligible program — up to 3 years depending on program length. It’s a common on-ramp to permanent residence.' },
-      { q: 'How much do I need to show in funds?', a: 'You must prove you can cover tuition plus living expenses (the IRCC’s current living-cost figure) for you and any dependents, minus any on-campus or on-campus employment income.' },
-      { q: 'Can my parents come with me?', a: 'Yes — parents may apply for visitor or, in some streams, family-accompanying permits tied to your study permit. We handle the family file together so nothing falls through.' },
-    ],
-  },
-  {
-    slug: 'work-permit',
-    title: 'Work Permits',
-    tagline: 'LMIA-based, intra-company transfer & International Mobility',
-    icon: 'work',
-    blurb: 'Whether you’re an employer hiring abroad or a worker seeking transfer, we match the right permit stream.',
-    who: ['Employers hiring foreign workers (LMIA)', 'Multinationals moving staff (intra-company transfer)', 'International Mobility Program (IMP/LMIA-exempt) workers', 'Spouses of international students on open permits'],
-    steps: [
-      'Stream match — LMIA vs LMIA-exempt vs ICP depends on role, employer, and country of origin.',
-      'Employer readiness — LMIA labour test, job offer, wage verification where needed.',
-      'Permit application — complete worker file with employer and employee in sync.',
-    ],
-    faqs: [
-      { q: 'Do I need a job offer for a work permit?', a: 'Most work permits do require an offered or held job. LMIA-exempt (International Mobility) routes include CUSMA, intra-company transfers, and certain cultural/academic exchanges that bypass the LMIA.' },
-      { q: 'What is an LMIA?', a: 'A Labour Market Impact Assessment is the employer’s proof that hiring a foreign worker won’t harm the Canadian labour market. It’s a precondition for most LMIA-based work permits and often a PR pathway.' },
-      { q: 'How long does a work permit take?', a: 'Varies by stream and country of processing. LMIA-based permits often take several months; LMIA-exempt ones can be quicker. We build a processing-timeline expectation before we start.' },
-    ],
-  },
-  {
-    slug: 'citizenship',
-    title: 'Citizenship & Naturalization',
-    tagline: 'From PR card to Canadian citizenship',
-    icon: 'citizenship',
-    blurb: 'You’ve earned it. We make the naturalization application clean — physical presence, history declaration, and the citizenship test all handled.',
-    who: ['PRs ready to apply for citizenship', 'People who may have overstayed or have gaps — we surface issues early', 'Parents naturalizing minor children'],
-    faqs: [
-      { q: 'When can I apply for citizenship?', a: 'Generally once you’re a permanent resident and have physically been in Canada for at least 730 days in the last 4 years — meeting the tax, criminal and identity requirements as well.' },
-      { q: 'Do I need to know a lot of French/English to take the test?', a: 'You need language ability at around CLB 4 (basic working level) in your official language of instruction. We prepare you for the test scope.' },
-    ],
-    steps: [
-      'Eligibility & presence audit — count your days, catch gaps before IRCC does.',
-      'Application + history declaration — clean, consistent, and verifiable',
-      'Test & ceremony — prep for the citizenship exam and oath.',
-    ],
-  },
-  {
-    slug: 'caregivers',
-    title: 'Caregivers Program',
-    tagline: 'Home Child-Care & Home Support workers',
-    icon: 'caregiver',
-    blurb: 'Caregiver permits that can lead to PR. We handle the employer match, permit and the PR application together.',
-    who: ['Home Child-Care Providers', 'Home Support Workers', 'Caregivers with in-Canada experience', 'Caring for dependent adults (home support)'],
-    faqs: [
-      { q: 'What experience do I need?', a: 'The Home Child-care and Home Support streams each have experience minima — typically 6 months full-time-equivalent in the last 24 months, in a qualifying caregiving role.' },
-      { q: 'Do I need a job offer?', a: 'Yes. Caregiver PR applications require a Canadian job offer, or an existing caregiver permit tied to a qualifying role.' },
-    ],
-    steps: [
-      'Role & experience verification — confirm your role fits the stream you qualify for.',
-      'Job offer & permit — where a work permit comes first.',
-      'PR application — full caregiver file, including the language requirement.',
-    ],
-  },
-  {
-    slug: 'lmia',
-    title: 'LMIA & Labour Market Impact Assessments',
-    tagline: 'Employer-side work authorization, end-to-end',
-    icon: 'lmia',
-    blurb: 'We handle the Canadian-side LMIA for employers who want to hire internationally — from filing to post-approval compliance.',
-    who: ['Canadian employers hiring abroad', 'Startups and mid-size firms', 'Multi-employer hiring programs', 'Employers wanting a clean, defensible LMIA file'],
-    faqs: [
-      { q: 'How long does an LMIA take?', a: 'Varies by province and program; commonly 4–10 weeks after filing. We set expectations up front so you can plan your hire around the timing.' },
-      { q: 'What if my LMIA is refused?', a: 'Refusals are reviewable. We prepare a review request and, where necessary, re-file with a strengthened labour-test file.' },
-    ],
-    steps: [
-      'Labour-market research — wage, occupation, and regional verification before anything is filed.',
-      'Job posting & LMIA filing — complete ESDC submission with defensible supporting documents.',
-      'Post-approval compliance — ensure the role, wage, and conditions match what was approved.',
-    ],
-  },
-  {
-    slug: 'refugee-asylum',
-    title: 'Refugee & Asylum Claims (IRB)',
-    tagline: 'Refugee-claimant support at IRB and beyond',
-    icon: 'refugee',
-    blurb: 'A credible, consistently-told refugee claim is the foundation. We help you prepare, and represent your interests at the IRB.',
-    who: ['People inside Canada claiming refugee status', 'Refugee-claimants with pending IRB dates', 'People with a first-instance refusal seeking appeal', 'Refugee claimants with complex persecution histories'],
-    faqs: [
-      { q: 'What happens in an IRB hearing?', a: 'Your panel hears you and witnesses, examines your claim against the Convention grounds, then decides. Credibility, consistency and detail decide most cases. Preparation is everything.' },
-      { q: 'Can I work while my claim is pending?', a: 'Potentially — a pending refugee-claimant work permit may be available depending on where you are in the process and your eligibility. We handle the work-permit request alongside your claim.' },
-    ],
-    steps: [
-      'Claim assessment & consistency check — pressure-test your story for gaps.',
-      'Evidence & witness prep — documentary, testimonial, and country-condition evidence.',
-      'IRB representation — advocacy at the hearing and, where needed, Federal Court.',
-    ],
-    urgent: true,
-  },
-  {
-    slug: 'h-c',
-    title: 'Humanitarian & Compassionate Applications',
-    tagline: 'H&C when the usual routes aren’t available to you',
-    icon: 'hc',
-    blurb: 'H&C is an equity valve — it can succeed when the formal pathways fail. We build the strong human-rights and compassion record that wins these cases.',
-    who: ['People with a failed or expired status', 'Long-term residents who hit a legal hurdle', 'Families in genuine hardship', 'Spouses in failed sponsorships'],
-    faqs: [
-      { q: 'Is H&C a last resort?', a: 'Usually yes — it’s an exception to the formal rules, not a substitute. That doesn’t mean it’s weak, though: a well-built H&C record is one of the most reliable PR routes for people in difficult circumstances.' },
-      { q: 'What makes a strong H&C case?', a: 'Depth of integration into Canada, compelling reasons you cannot or should not leave, evidence of established family and community ties, and a credible account of your circumstances. We build to those criteria.' },
-    ],
-    steps: [
-      'Case strategy — build the human-rights and compassion record, case-by-case.',
-      'Evidence collection — character, community, and hardship evidence.',
-      'Submission & decision — H&C officer review and, where granted, PR.',
-    ],
-  },
-  {
-    slug: 'inadmissibility-appeals',
-    title: 'Inadmissibility & Appeals',
-    tagline: 'Removal orders, IRB, Federal Court, and time-critical matters',
-    icon: 'appeals',
-    blurb: 'This is the fastest-moving, highest-stakes side of the practice. We handle suspension of removal, appeals, and IRB/Federal Court filings on strict deadlines.',
-    who: ['People facing a removal or deportation order', 'People with an IRB refusal', 'Applicants with inadmissibility findings (criminal, medical, misrepresentation)', 'Anyone approaching a filing deadline'],
-    faqs: [
-      { q: 'I have a removal order. What should I do first?', a: 'Call us immediately. There are often time-limited suspensions you can seek while your appeal or new application moves forward. Do not wait for a formal letter from any government — the clock may already be running.' },
-      { q: 'Can a criminal record block my entry or PR?', a: 'Yes, depending on the offence, its nature, when it occurred, and your rehabilitation. Criminal inadmissibility cases are fact-specific — that is exactly why professional review comes first.' },
-    ],
-    steps: [
-      'Urgent review — deadline map and immediate protection strategy.',
-      'Appeal / judicial review — IRB / Federal Court filings on strict timelines.',
-      'Residual applications — where the path allows, we file the application that can save the position.',
-    ],
-    urgent: true,
-  },
-  {
-    slug: 'notary-services',
-    title: 'Notary Services',
-    tagline: 'Affidavits, invitation letters, certified true copies & travel consents',
-    icon: 'notary',
-    blurb: 'Notarization is often the difference between a file moving and a file stalled. Same-day service in-person at our Brampton office.',
-    who: ['Parents consenting to a minor traveling abroad', 'Anyone needing a court-ready affidavit', 'Home-based business owners needing certified true copies', 'Immigration files waiting on a witness or oath'],
-    faqs: [
-      { q: 'What documents can you notarize?', a: 'Affidavits, oaths, sworn declarations, consent-to-travel letters, certified true copies, and other documents where a statutory declaration or witnessing is required. We confirm the document’s admissibility before we sign.' },
-      { q: 'Do I need to bring an ID?', a: 'Yes — government-issued photo ID. Depending on the document, you may also need to bring the original for comparison.' },
-    ],
-    steps: [
-      'Book a slot — in-person at our Brampton office.',
-      'We review and witness — same-day notarization where the document allows.',
-      'Send to the right desk — we can help route the document to the receiving officer or agency.',
-    ],
-  },
-  {
-    slug: 'other-applications',
-    title: 'Other Applications',
-    tagline: 'PR card, GCMS notes, PFL responses, TRP, U.S. visas',
-    icon: 'other',
-    blurb: 'A range of time-sensitive and technical applications handled in one place — PR card renewals, GCMS notes, Procedural Fairness Letters, TRPs, U.S. visas and more.',
-    who: ['PR card expiries and renewals', 'Requests for GCMS notes', 'S.40 IRPA Procedural Fairness Letter responses', 'Temporary Resident Permits (TRP)', 'U.S. visitor/B1-B2 visas for Canadians'],
-    faqs: [
-      { q: 'What are GCMS notes?', a: 'GCMS (Global Case Management System) notes are the officer-to-officer record on your application request. They are the single most useful tool during a hold — we request and interpret them to understand what happens next.' },
-      { q: 'Can you help with a Procedural Fairness Letter (PFL)?', a: 'Yes. A PFL is one of the most consequential letters you can receive — it gives you a chance to present arguments before a negative decision. Response quality frequently changes the outcome, and the deadline is tight.' },
-    ],
-    steps: [
-      'Intake & scope — which application is which, and what the deadline is.',
-      'Preparation — evidence, legal argument, and submission-ready file.',
-      'Filing & follow-up — we file, track, and escalate as needed.',
-    ],
-  },
-];
+export function practiceArea(slug) {
+  const d = DATA[slug];
+  if (!d) return null;
+  return `
+    <section class="page-hero">
+      <div class="container">
+        <nav class="crumbs" aria-label="Breadcrumb">
+          <a href="#/">Home</a><span class="sep" aria-hidden>/</span>
+          <a href="#/practice">Practice Areas</a><span class="sep" aria-hidden>/</span>
+          <span class="current">${d.title}</span>
+        </nav>
+        <span class="eyebrow" style="color:var(--c-gold);">${d.kicker}</span>
+        <h1>${d.in}</h1>
+        <p class="lead">${d.lead}</p>
+      </div>
+    </section>
 
-export function get(slug) {
-  return PATHWAYS.find(p => p.slug === slug)
+    <section class="section">
+      <div class="container">
+        <div style="display:grid;grid-template-columns:2fr 1fr;gap:3rem;align-items:start;">
+          <div>
+            <div class="section-head" style="margin-bottom:2rem;">
+              <span class="eyebrow">How the file is built</span>
+              <h2>Step by step, in plain language.</h2>
+            </div>
+            <div class="timeline">
+              ${d.steps.map((s) => `
+                <div class="tl-item">
+                  <span class="tl-marker" aria-hidden="true"></span>
+                  <div class="tl-phase">${s.phase}</div>
+                  <h4>${s.title}</h4>
+                  <p>${s.text}</p>
+                  ${s.meta ? `<span class="tl-meta">${s.meta}</span>` : ""}
+                </div>
+              `).join("")}
+            </div>
+          </div>
+          <aside style="display:grid;gap:1rem;">
+            <div class="card">
+              <h3 style="margin-top:0;">Prefer to call?</h3>
+              <p class="muted" style="font-size:.9rem;margin-bottom:1rem;">Talk now, or WhatsApp. Same consultant, same answer.</p>
+              <div class="btn-group" style="flex-direction:column;align-items:stretch;">
+                <a href="tel:+14165550199" class="btn btn-primary btn-block">Call (416) 555-0199</a>
+                <a href="https://wa.me/14165550199" target="_blank" rel="noopener" class="btn btn-secondary btn-block">WhatsApp</a>
+              </div>
+            </div>
+            <div class="card">
+              <h3 style="margin-top:0;">Not sure this is your path?</h3>
+              <p class="muted" style="font-size:.9rem;margin-bottom:1rem;">A 30-minute free assessment sorts it out — no card, no obligation.</p>
+              <a href="#/assessment" class="btn btn-terra btn-block">Book a Free Assessment</a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="background:var(--c-paper-soft);">
+      <div class="container container-narrow">
+        <div class="section-head" style="margin-bottom:2rem;">
+          <span class="eyebrow">Common questions</span>
+          <h2>What clients ask before they start</h2>
+        </div>
+        <div id="faq-area">${faqList(d.faq)}</div>
+      </div>
+    </section>
+    ${ctaBand()}
+  `;
 }
-export { ICONS }
+
+export function bindPracticeArea(root) {
+  const faq = root.querySelector("#faq-area");
+  if (faq) bindFaq(faq);
+}
