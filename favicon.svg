@@ -1,6 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#1F3A2D"/>
-  <path d="M18 46 L28 22 L38 44 L46 26 L54 46" stroke="#FAF6EE" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="28" cy="22" r="3" fill="#B04A32"/>
-  <circle cx="54" cy="46" r="3" fill="#B04A32"/>
+  <rect width="64" height="64" rx="12" fill="#1a1a1a"/>
+  <text x="32" y="28" text-anchor="middle" font-family="Georgia,serif" font-weight="700" font-size="14" fill="#FFFFFF">NIJJAR</text>
+  <text x="32" y="46" text-anchor="middle" font-family="Georgia,serif" font-size="9" fill="#E2A322" letter-spacing="1.5">IMMIGRATION</text>
 </svg>

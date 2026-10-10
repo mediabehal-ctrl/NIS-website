@@ -1,33 +1,30 @@
 /* =========================================================
-   NIS — base.css (rebuilt, same color theme)
-   Palette (preserved from original):
-     --c-paper      #FAF6EE   warm cream
-     --c-ink        #17251D   deep forest ink
-     --c-ink-soft   #3B4A41   muted forest
-     --c-green      #1F3A2D   deep green (primary)
-     --c-green-dark #14261D   darkest green
-     --c-green-soft #E7EFE8   green tint bg
-     --c-terra      #B04A32   terracotta (accent)
-     --c-terra-dark #8E3722   dark terracotta
-     --c-line       rgba(23,37,29,.14)
+   NIS — base.css
+   Palette (from Nijjar Immigration logo):
+     --c-ink       #1a1a1a   black ink
+     --c-gold      #E2A322   amber/gold (primary accent)
+     --c-gold-dark #B58318   dark gold
+     --c-white     #FFFFFF   page background
+     --c-offwhite  #F7F5F0   soft warm white
+     --c-line      rgba(26,26,26,.14)
    ========================================================= */
 
 :root {
-  --c-paper:       #FAF6EE;
-  --c-paper-soft:  #F2EBDC;
+  --c-paper:       #FFFFFF;
+  --c-paper-soft:  #F7F5F0;
   --c-card:        #FFFFFF;
-  --c-ink:         #17251D;
-  --c-ink-soft:    #3B4A41;
-  --c-ink-muted:   #6B7A70;
-  --c-green:       #1F3A2D;
-  --c-green-dark:  #14261D;
-  --c-green-soft:  #E7EFE8;
-  --c-terra:       #B04A32;
-  --c-terra-dark:  #8E3722;
-  --c-terra-soft:  #FBE9E2;
-  --c-line:        rgba(23,37,29,.14);
-  --c-line-soft:   rgba(23,37,29,.07);
-  --c-gold:        #C9A96E;
+  --c-ink:         #1a1a1a;
+  --c-ink-soft:    #444444;
+  --c-ink-muted:   #777777;
+  --c-green:       #1a1a1a;
+  --c-green-dark:  #0d0d0d;
+  --c-green-soft:  #F4F2EE;
+  --c-terra:       #E2A322;
+  --c-terra-dark:  #B58318;
+  --c-terra-soft:  #FCF4E0;
+  --c-line:        rgba(26,26,26,.14);
+  --c-line-soft:   rgba(26,26,26,.07);
+  --c-gold:        #E2A322;
 
   --font-body:    'Inter', system-ui, -apple-system, sans-serif;
   --font-display: 'Lora', Georgia, 'Times New Roman', serif;
@@ -191,32 +188,31 @@ p  { font-size: 1rem; line-height: 1.68; }
   padding: 0.6rem 1.5rem;
 }
 .brand {
-  display: flex; align-items: center; gap: 0.7rem;
-  flex-shrink: 0;
+  display: flex; flex-direction: column; align-items: flex-start;
+  gap: 0.15rem; flex-shrink: 0; padding: 0.15rem 0;
 }
-.brand-mark {
-  width: 40px; height: 40px;
-  display: grid; place-items: center;
-  background: var(--c-green);
-  color: var(--c-paper);
-  border-radius: var(--radius);
-  font-family: var(--font-display);
-  font-size: 1.3rem; font-weight: 700;
-  box-shadow: var(--shadow-sm);
+.brand-word {
+  display: flex; align-items: baseline; gap: 0.4rem;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.15rem; line-height: 1;
+  letter-spacing: 0.06em;
+  border-top: 2px solid var(--c-ink);
+  border-bottom: 2px solid var(--c-ink);
+  padding: 0.3rem 0.1rem;
 }
-.brand-name {
-  font-family: var(--font-display);
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--c-ink);
-  letter-spacing: -0.01em;
-  line-height: 1.15;
+.brand-nijjar {
+  font-weight: 700; color: var(--c-ink);
+}
+.brand-mig {
+  font-weight: 400; color: var(--c-gold);
+  letter-spacing: 0.08em;
 }
 .brand-tag {
-  font-size: 0.72rem;
-  font-weight: 600;
-  color: var(--c-ink-muted);
-  letter-spacing: 0.04em;
+  font-size: 0.62rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--c-ink-soft);
+  letter-spacing: 0.03em;
   text-transform: uppercase;
 }
 
@@ -842,12 +838,14 @@ p  { font-size: 1rem; line-height: 1.68; }
   max-width: 1180px;
   margin: 0 auto;
 }
-.footer-brand .brand-name {
-  color: #fff;
+.footer-brand .brand-word {
   font-size: 1.2rem;
-  display: block;
   margin-bottom: 0.75rem;
+  border-top-color: rgba(255,255,255,.6);
+  border-bottom-color: rgba(255,255,255,.6);
 }
+.footer-brand .fw-nijjar { color: #fff; }
+.footer-brand .fw-mig { color: var(--c-gold); }
 .footer-brand p {
   font-size: 0.88rem;
   line-height: 1.6;

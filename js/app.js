@@ -63,7 +63,7 @@ function routeChange() {
     content = notFound;
   }
 
-  const root = document.getElementById("site");
+  const root = document.getElementById("site-main");
   renderHeader();
   root.innerHTML = content();
   renderFooter();

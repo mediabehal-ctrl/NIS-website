@@ -9,7 +9,10 @@ export function renderFooter() {
   footer.innerHTML = `
     <div class="footer-grid">
       <div class="footer-brand">
-        <span class="brand-name">Nijjar Immigration Services</span>
+        <span class="brand-word footer-word">
+          <span class="brand-nijjar fw-nijjar">NIJJAR</span>
+          <span class="brand-mig fw-mig">IMMIGRATION</span>
+        </span>
         <p>Canada's immigration specialists. One honest, multilingual team — Express Entry, Provincial Nominee, family sponsorship, study & work permits, citizenship, IRB proceedings.</p>
         <div class="footer-badges" aria-label="Regulatory membership">
           <span class="fbadge">CICC · ICRC</span>

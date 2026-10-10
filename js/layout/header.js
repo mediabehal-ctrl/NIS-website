@@ -29,11 +29,11 @@ export function renderHeader() {
     <div class="header">
       <div class="container">
         <a href="#/" class="brand">
-          <span class="brand-mark" aria-hidden="true">N</span>
-          <span>
-            <span class="brand-name">Nijjar Immigration Services</span>
-            <span class="brand-tag">${t("brand_tag")}</span>
+          <span class="brand-word">
+            <span class="brand-nijjar">NIJJAR</span>
+            <span class="brand-mig">IMMIGRATION</span>
           </span>
+          <span class="brand-tag">${t("brand_tag")}</span>
         </a>
         <nav class="site-nav" id="site-nav" aria-label="Primary">
           ${NAV.map((n) => `
